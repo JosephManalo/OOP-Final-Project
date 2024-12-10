@@ -6,7 +6,6 @@ public class Membership {
     private boolean paid;
     private Trainer trainer;
 
-    // Correcting the method call to match the method signature
     private static void processPayment(Scanner scanner, Membership membership) {
         if (membership.isPaid()) {
             System.out.println("Membership is already paid.");
@@ -24,30 +23,27 @@ public class Membership {
         }
     }
     private static void addMembership(Scanner scanner, Members member) {
-        // Example membership creation process
         String typeName = getInputString(scanner, "Enter membership type (e.g., Basic, Premium): ");
         int duration = getInput(scanner, "Enter membership duration in months: ");
         double fee = getInput(scanner, "Enter membership fee: ");
         Trainer trainer = getTrainer(scanner);
 
         Membership membership = new Membership(generateMembershipId++, typeName, duration, fee, trainer);
-        member.setMembership(membership);  // Update the member with the new membership
+        member.setMembership(membership);  
         membershipsList.add(membership);
 
         System.out.println("New membership added for " + member.getName());
     }
 
-    // Constructor
     public Membership(int membershipId, String typeName, int duration, double fee, Trainer trainer) {
         this.membershipId = membershipId;
         this.typeName = typeName;
         this.duration = duration;
         this.fee = fee;
-        this.paid = false; // default to false
+        this.paid = false; 
         this.trainer = trainer;
     }
 
-    // Getters and setters
     public int getMembershipId() {
         return membershipId;
     }
@@ -76,7 +72,6 @@ public class Membership {
         return trainer;
     }
 
-    // Method to display membership details
     public String details() {
         return "Type: " + typeName + ", Duration: " + duration + " months, Fee: $" + fee + ", Paid: " + (paid ? "Yes" : "No") + ", Trainer: " + (trainer != null ? trainer.getName() : "None");
     }
