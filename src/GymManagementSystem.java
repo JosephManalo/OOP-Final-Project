@@ -30,7 +30,6 @@ public class GymManagementSystem {
         }
     }
 
-    // Login method
     private static String login(Scanner scanner) {
         System.out.println("Login as:\n1. Admin\n2. User\n3. Register New Member");
         String choice = scanner.nextLine();
@@ -47,7 +46,6 @@ public class GymManagementSystem {
         }
     }
 
-    // Get Member by Membership ID
     private static Members getMemberByMembershipId(Scanner scanner) {
         System.out.print("Enter Membership ID: ");
         int membershipId = getInput(scanner, "Enter Membership ID: ");
@@ -60,7 +58,6 @@ public class GymManagementSystem {
         return null;
     }
 
-    // Admin menu
     private static void adminMenu(Scanner scanner) {
         while (true) {
             System.out.println("\nAdmin Menu:");
@@ -102,7 +99,6 @@ public class GymManagementSystem {
         }
     }
 
-    // User menu
     private static void userMenu(Scanner scanner, Members member) {
         while (true) {
             System.out.println("\nUser Menu for " + member.getName() + ":");
@@ -159,14 +155,12 @@ public class GymManagementSystem {
         }
     }
 
-    // Membership cancellation
     private static void cancelMembership(Scanner scanner, Members member) {
         Membership membership = getMembershipById(member.getMembershipId());
         if (membership != null) {
             membershipsList.remove(membership);
             System.out.println("Membership for " + member.getName() + " has been canceled.");
-
-            // If the membership has a trainer, unassign the trainer
+            
             if (membership.getTrainer() != null) {
                 membership.getTrainer().setAssignedMember(null);
                 System.out.println("Trainer " + membership.getTrainer().getName() + " has been unassigned.");
@@ -176,7 +170,6 @@ public class GymManagementSystem {
         }
     }
 
-    // Process payment
     private static void processPayment(Scanner scanner, Membership membership) {
         if (membership.isPaid()) {
             System.out.println("Membership is already paid.");
@@ -194,23 +187,20 @@ public class GymManagementSystem {
         }
     }
 
-    // Helper method to get input (generic for integers)
     private static int getInput(Scanner scanner, String prompt) {
         System.out.print(prompt);
         while (!scanner.hasNextInt()) {
             System.out.println("Invalid input. Please enter a valid number.");
-            scanner.next(); // Clear the invalid input
+            scanner.next();
         }
         return scanner.nextInt();
     }
 
-    // Helper method to get input (for strings)
     private static String getInputString(Scanner scanner, String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
     }
 
-    // Methods to handle members, trainers, and memberships
 
     private static void addMember(Scanner scanner) {
         String name = getInputString(scanner, "Enter your username: ");
